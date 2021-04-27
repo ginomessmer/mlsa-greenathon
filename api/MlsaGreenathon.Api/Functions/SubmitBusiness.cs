@@ -21,6 +21,7 @@ using Microsoft.OpenApi.Models;
 using MlsaGreenathon.Api.Requests;
 using MlsaGreenathon.Models;
 using Newtonsoft.Json;
+using Exception = System.Exception;
 
 namespace MlsaGreenathon.Api.Functions
 {
@@ -41,6 +42,7 @@ namespace MlsaGreenathon.Api.Functions
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             [Table("Businesses", Connection = Defaults.DefaultStorageConnection)] CloudTable table,
             [Blob("logos/{rand-guid}", FileAccess.Write)] ICloudBlob logoBlob,
+            [Queue("businesses", Connection = Defaults.DefaultStorageConnection)] ICollector<string> queue,
             ILogger log)
         {
             if (!req.HasFormContentType)
@@ -81,6 +83,15 @@ namespace MlsaGreenathon.Api.Functions
             {
                 log.LogError(ex, "Table insert operation failed");
                 return new InternalServerErrorResult();
+            }
+
+            try
+            {
+                queue.Add(JsonConvert.SerializeObject(entity));
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, "Couldn't add business to queue");
             }
 
             return new OkResult(); // TODO: Return created at result

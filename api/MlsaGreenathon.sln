@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MlsaGreenathon.Api", "MlsaGreenathon.Api\MlsaGreenathon.Api.csproj", "{91E3D4BB-31A9-45E9-A0A6-4241888DC740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MlsaGreenathon.Models", "MlsaGreenathon.Models\MlsaGreenathon.Models.csproj", "{AB3DB02E-DF0D-45C0-B358-D304C83766EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MlsaGreenathon.Models", "MlsaGreenathon.Models\MlsaGreenathon.Models.csproj", "{AB3DB02E-DF0D-45C0-B358-D304C83766EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
