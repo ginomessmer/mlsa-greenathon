@@ -28,6 +28,9 @@ namespace MlsaGreenathon.Api.Functions
             [Table("Businesses", Connection = Defaults.DefaultStorageConnection)] CloudTable table,
             ILogger log)
         {
+            if (business is null)
+                return new NotFoundResult();
+
             business.IsApproved = true;
 
             var mergeOperation = TableOperation.Merge(business);
