@@ -131,7 +131,7 @@ div.input {
 
   z-index: 20;
 
-  @media (min-width: $width-md) {
+  @media (min-width: $width-l) {
     width: 500px;
     border-radius: $corners;
   
@@ -144,6 +144,12 @@ div.input {
 
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+
+    max-height: 90vh;
+  }
+
+  &.overflow {
+    overflow-y: auto;
   }
 }
 

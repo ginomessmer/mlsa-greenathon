@@ -80,7 +80,7 @@ const App = () => {
           <Sidebar />
           <SearchBox />
 
-          <Modal className="modal"
+          <Modal className="modal overflow"
             isOpen={submitBusinessModelIsOpen}
             shouldCloseOnOverlayClick={true}
             shouldCloseOnEsc={true}>
