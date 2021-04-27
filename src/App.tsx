@@ -27,6 +27,10 @@ const azureMapControls: IAzureMapControls[] = [
     controlName: 'StyleControl',
     controlOptions: { mapStyles: 'all' },
     options: { position: 'top-right' } as ControlOptions
+  },
+  {
+    controlName: 'ZoomControl',
+    options: { position: 'top-right' } as ControlOptions
   }
 ]
 
