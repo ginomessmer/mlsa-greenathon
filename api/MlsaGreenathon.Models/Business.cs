@@ -31,9 +31,14 @@ namespace MlsaGreenathon.Models
 
         public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
 
+        public Business(string countryIsoCode)
+        {
+            CountryIsoCode = countryIsoCode;
+            PartitionKey = CountryIsoCode;
+        }
+
         public Business()
         {
-            PartitionKey = "business";
         }
     }
 }
