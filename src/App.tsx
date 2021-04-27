@@ -3,9 +3,15 @@ import Modal from 'react-modal';
 
 import { Sidebar, SearchBox, SubmitBusinessForm, ModalCloseButton } from './components';
 import { Business, queryBusiness, submitBusiness } from './services/api';
+import { BusinessMarker } from './data';
 
-import { AzureMap, AzureMapFeature, AzureMapsProvider, AzureMapDataSourceProvider, AzureMapLayerProvider, IAzureMapLayerType, IAzureMapControls, IAzureMapOptions } from 'react-azure-maps';
-import { AuthenticationType, data, control, ControlOptions } from 'azure-maps-control';
+
+import { AuthenticationType, data, ControlOptions } from 'azure-maps-control';
+import {
+  AzureMap, AzureMapFeature, AzureMapsProvider,
+  AzureMapDataSourceProvider, AzureMapLayerProvider, IAzureMapLayerType,
+  IAzureMapControls, IAzureMapOptions
+} from 'react-azure-maps';
 
 import './App.scss';
 
@@ -23,12 +29,6 @@ const azureMapControls: IAzureMapControls[] = [
     options: { position: 'top-right' } as ControlOptions
   }
 ]
-
-export interface BusinessMarker {
-  position: data.Position;
-}
-
-Modal.setAppElement('#root');
 
 const App = () => {
   // Modal
