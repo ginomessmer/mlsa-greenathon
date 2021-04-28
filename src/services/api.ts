@@ -22,7 +22,7 @@ export interface CreateBusiness {
   logo: Blob;
 }
 
-export const queryBusiness = (params: any): Promise<Business[]> =>
+export const queryBusiness = (params?: any) =>
   axios.get(endpoint + '/QueryBusinesses', { params });
 
 export const submitBusiness = (business: CreateBusiness) => {
