@@ -2,14 +2,19 @@
 
 .search-box {
   position: absolute;
-  top: $d-4;
-
-  left: $d-4;
-  right: $d-4;
+  top: $d-1;
+  left: $d-1;
+  right: 52px;
 
   @media (min-width: $width-md) {
     left: 100px;
     right: 100px;
+
+    top: $d-4;
+    left: $d-4;
+    right: $d-4;
+
+    padding: $d-3;
   }
 
   @media (min-width: $width-l) {
@@ -21,7 +26,7 @@
   box-shadow: $shadow-element;
   border-radius: $corners;
 
-  padding: $d-3;
+  padding: $d-2;
 
   input {
     width: 100%;
