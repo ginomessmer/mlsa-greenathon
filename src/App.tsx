@@ -93,7 +93,9 @@ const App = () => {
           </Modal>
         
           <div className="fab-overlay">
-            <button className="fab" onClick={() => setSubmitBusinessModalOpen(true)}>Add a new business</button>
+            <button className="fab" onClick={() => setSubmitBusinessModalOpen(true)}>
+              <span className="fab-label">Add a new business</span>
+            </button>
           </div>
         </div>
       </AzureMapsProvider>
