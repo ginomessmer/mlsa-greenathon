@@ -48,8 +48,10 @@ namespace MlsaGreenathon.Api.Functions
             [Queue("businesses", Connection = Defaults.DefaultStorageConnection)] ICollector<string> queue,
             ILogger log)
         {
+#if !DEBUG
             if (!await _captchaService.VerifyAsync(req))
                 return new BadRequestErrorMessageResult("Captcha failed");
+#endif
 
             if (!req.HasFormContentType)
                 return new BadRequestErrorMessageResult("Request must be form-data");
