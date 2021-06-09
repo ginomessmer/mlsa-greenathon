@@ -19,6 +19,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MlsaGreenathon.Api.Requests;
+using MlsaGreenathon.Api.Services;
 using MlsaGreenathon.Models;
 using Newtonsoft.Json;
 using Exception = System.Exception;
@@ -28,10 +29,12 @@ namespace MlsaGreenathon.Api.Functions
     public class SubmitBusiness
     {
         private readonly IAzureMapsServices _azureMapsServices;
+        private readonly ICaptchaService _captchaService;
 
-        public SubmitBusiness(IAzureMapsServices azureMapsServices)
+        public SubmitBusiness(IAzureMapsServices azureMapsServices, ICaptchaService captchaService)
         {
             _azureMapsServices = azureMapsServices;
+            _captchaService = captchaService;
         }
 
         [FunctionName("SubmitBusiness")]
@@ -45,6 +48,9 @@ namespace MlsaGreenathon.Api.Functions
             [Queue("businesses", Connection = Defaults.DefaultStorageConnection)] ICollector<string> queue,
             ILogger log)
         {
+            if (!await _captchaService.VerifyAsync(req))
+                return new BadRequestErrorMessageResult("Captcha failed");
+
             if (!req.HasFormContentType)
                 return new BadRequestErrorMessageResult("Request must be form-data");
 

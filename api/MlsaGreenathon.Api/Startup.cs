@@ -14,8 +14,10 @@ namespace MlsaGreenathon.Api
         {
             var configuration = builder.GetContext().Configuration;
 
+            builder.Services.Configure<GoogleRecaptchaOptions>(configuration.GetSection("Recaptcha"));
+
             builder.Services.AddSingleton<IAzureMapsServices>(new AzureMapsServices(configuration.GetConnectionString("AzureMaps")));
-            builder.Services.AddSingleton<ICaptchaService, RecaptchaService>();
+            builder.Services.AddSingleton<ICaptchaService, GoogleReCaptcha3Service>();
         }
     }
 }

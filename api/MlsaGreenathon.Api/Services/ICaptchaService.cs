@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,15 @@ namespace MlsaGreenathon.Api.Services
 {
     public interface ICaptchaService
     {
-        public Task<bool> Verify(HttpRequest request);
+        Task<bool> VerifyAsync(HttpRequest request);
+    }
+
+    public static class CaptchaExtensions
+    {
+        public static async Task RequireVerificationAsync(this ICaptchaService captcha, HttpRequest request)
+        {
+            if (!await captcha.VerifyAsync(request))
+                throw new Exception("Captcha not passed");
+        }
     }
 }
