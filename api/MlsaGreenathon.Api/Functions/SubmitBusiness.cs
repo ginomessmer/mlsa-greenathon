@@ -2,12 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AzureMapsToolkit;
 using AzureMapsToolkit.Search;
-using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos.Table;
@@ -19,19 +17,21 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MlsaGreenathon.Api.Requests;
+using MlsaGreenathon.Api.Services;
 using MlsaGreenathon.Models;
 using Newtonsoft.Json;
-using Exception = System.Exception;
 
 namespace MlsaGreenathon.Api.Functions
 {
     public class SubmitBusiness
     {
         private readonly IAzureMapsServices _azureMapsServices;
+        private readonly ICaptchaService _captchaService;
 
-        public SubmitBusiness(IAzureMapsServices azureMapsServices)
+        public SubmitBusiness(IAzureMapsServices azureMapsServices, ICaptchaService captchaService)
         {
             _azureMapsServices = azureMapsServices;
+            _captchaService = captchaService;
         }
 
         [FunctionName("SubmitBusiness")]
@@ -45,6 +45,11 @@ namespace MlsaGreenathon.Api.Functions
             [Queue("businesses", Connection = Defaults.DefaultStorageConnection)] ICollector<string> queue,
             ILogger log)
         {
+#if !DEBUG
+            if (!await _captchaService.VerifyAsync(req))
+                return new BadRequestErrorMessageResult("Captcha failed");
+#endif
+
             if (!req.HasFormContentType)
                 return new BadRequestErrorMessageResult("Request must be form-data");
 
