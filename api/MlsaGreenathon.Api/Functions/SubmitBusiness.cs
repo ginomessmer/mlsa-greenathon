@@ -2,12 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AzureMapsToolkit;
 using AzureMapsToolkit.Search;
-using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos.Table;
@@ -22,7 +20,6 @@ using MlsaGreenathon.Api.Requests;
 using MlsaGreenathon.Api.Services;
 using MlsaGreenathon.Models;
 using Newtonsoft.Json;
-using Exception = System.Exception;
 
 namespace MlsaGreenathon.Api.Functions
 {
