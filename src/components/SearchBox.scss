@@ -2,9 +2,18 @@
 
 .search-box {
   position: absolute;
-  top: $d-1;
   left: $d-1;
+  top: $d-1;
   right: 52px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-style: groove;
+
+  max-height: 80vh;
 
   @media (min-width: $width-md) {
     left: 100px;
@@ -38,4 +47,28 @@
     outline: none;
     border: none;
   }
+
+  ul.search-results {
+    list-style: none;
+    width: 100%;
+
+    padding: 0;
+
+    overflow-y: auto;
+
+    li {
+      padding: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+
+      &:hover {
+        background: $bg-dark-subtle;
+      }
+    }
+  }
+}
+
+p{
+  margin: 10px;
+  font-size: 18px;
 }
