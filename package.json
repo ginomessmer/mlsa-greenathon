@@ -18,7 +18,7 @@
     "react-azure-maps": "^0.3.0",
     "react-dom": "^17.0.2",
     "react-modal": "^3.13.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "sass": "^1.32.11",
     "typescript": "^4.2.4",
     "web-vitals": "^1.1.1",
